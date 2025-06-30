@@ -100,4 +100,41 @@ public class ContactRestControllerTest {
 		return contactRepository.saveAndFlush(contact);
 	}
 
+	@Test
+	public void testAddition() throws Exception {
+		mvc.perform(get("/calculator/add")
+				.param("x", "5")
+				.param("y", "3"))
+			.andExpect(status().isOk())
+			.andExpect(content().string("8"));
+	}
+
+	@Test
+	public void testSubtraction() throws Exception {
+		mvc.perform(get("/calculator/subtract")
+				.param("x", "10")
+				.param("y", "4"))
+			.andExpect(status().isOk())
+			.andExpect(content().string("6"));
+	}
+
+	@Test
+	public void testMultiplication() throws Exception {
+		mvc.perform(get("/calculator/multiply")
+				.param("x", "7")
+				.param("y", "6"))
+			.andExpect(status().isOk())
+			.andExpect(content().string("42"));
+	}
+
+	@Test
+	public void testDivision() throws Exception {
+		mvc.perform(get("/calculator/divide")
+				.param("x", "20")
+				.param("y", "4"))
+			.andExpect(status().isOk())
+			.andExpect(content().string("5"));
+	}
+
+
 }
