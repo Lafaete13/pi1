@@ -1,10 +1,10 @@
 package br.edu.ifb.java_web_dev.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,8 +30,7 @@ public class Contact {
     public boolean equals(Object obj) {
         boolean result = false;
 
-        if (obj instanceof Contact) {
-            Contact c = (Contact) obj;
+        if (obj instanceof Contact c) {
             result = c.getId() == this.getId();
         }
 

@@ -1,8 +1,19 @@
 package br.edu.ifb.java_web_dev;
 
+import java.io.IOException;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -11,24 +22,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-
 import br.edu.ifb.java_web_dev.model.Contact;
 import br.edu.ifb.java_web_dev.persistence.ContactRepository;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = br.edu.ifb.java_web_dev.ContactsApplication.class)
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
@@ -99,42 +95,5 @@ public class ContactRestControllerTest {
 		Contact contact = new Contact(nome);
 		return contactRepository.saveAndFlush(contact);
 	}
-
-	@Test
-	public void testAddition() throws Exception {
-		mvc.perform(get("/calculator/add")
-				.param("x", "5")
-				.param("y", "3"))
-			.andExpect(status().isOk())
-			.andExpect(content().string("8"));
-	}
-
-	@Test
-	public void testSubtraction() throws Exception {
-		mvc.perform(get("/calculator/subtract")
-				.param("x", "10")
-				.param("y", "4"))
-			.andExpect(status().isOk())
-			.andExpect(content().string("6"));
-	}
-
-	@Test
-	public void testMultiplication() throws Exception {
-		mvc.perform(get("/calculator/multiply")
-				.param("x", "7")
-				.param("y", "6"))
-			.andExpect(status().isOk())
-			.andExpect(content().string("42"));
-	}
-
-	@Test
-	public void testDivision() throws Exception {
-		mvc.perform(get("/calculator/divide")
-				.param("x", "20")
-				.param("y", "4"))
-			.andExpect(status().isOk())
-			.andExpect(content().string("5"));
-	}
-
 
 }

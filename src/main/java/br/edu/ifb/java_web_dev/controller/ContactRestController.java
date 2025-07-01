@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -62,29 +61,5 @@ public class ContactRestController {
         contactRepository.deleteById(id);
     }
 
-    @RestController
-    public class CalculatorRestController {
-
-        @GetMapping("/calculator/add")
-        public String add(@RequestParam int x, @RequestParam int y) {
-            return String.valueOf(x + y);
-        }
-
-        @GetMapping("/calculator/subtract")
-        public String subtract(@RequestParam int x, @RequestParam int y) {
-            return String.valueOf(x - y);
-        }
-
-        @GetMapping("/calculator/multiply")
-        public String multiply(@RequestParam int x, @RequestParam int y) {
-            return String.valueOf(x * y);
-        }
-
-        @GetMapping("/calculator/divide")
-        public String divide(@RequestParam int x, @RequestParam int y) {
-            if (y == 0) return "Cannot divide by zero";
-            return String.valueOf(x / y);
-        }
-    }
 
 }
